@@ -23,6 +23,14 @@ $ npm test
 
 2. I cheated a bit when using named lambda abstractions (for the sake of readability) and recursion (for no good reason… I should've implemented the _Y_ combinator instead)
 
+#### References:
+
+* [Lambda Calculi, by Shane Steinert-Threlkeld](http://www.iep.utm.edu/lambda-calculi/)
+* [Lambda Calculus - Wikipedia](https://en.wikipedia.org/wiki/Lambda_calculus)
+* [Church Encoding - Wikipedia](https://en.wikipedia.org/wiki/Church_encoding)
+* [Programming with Nothing](https://codon.com/programming-with-nothing), by [@tomstuart](https://github.com/tomstuart)
+* [Fun with the Lambda Calculus](https://www.youtube.com/watch?v=QPqoFCHpLF4), by [@coreyhaines](https://github.com/coreyhaines)
+
 ---
 
 I hope you enjoy reading it as much as I enjoyed doing it! :heart: Perhaps you could add more examples…? :smile:
