@@ -1,0 +1,14 @@
+{
+  "name": "lambda",
+  "version": "1.0.0",
+  "description": "",
+  "dependencies": {},
+  "devDependencies": {
+    "chokidar-cli": "1.2.0"
+  },
+  "scripts": {
+    "test": "chokidar 'lambda.js' -d 0 -c 'clear;node --stack-size=65500 lambda'"
+  },
+  "author": "",
+  "license": "ISC"
+}
