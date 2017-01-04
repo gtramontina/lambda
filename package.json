@@ -7,7 +7,9 @@
     "chokidar-cli": "1.2.0"
   },
   "scripts": {
-    "test": "chokidar 'lambda.js' -d 0 -c 'clear;node --stack-size=65500 lambda'"
+    "test": "node --stack-size=65500 lambda",
+    "test:ci": "npm test | (! grep '✗')",
+    "test:watch": "chokidar 'lambda.js' -d 0 -c 'clear;npm test'"
   },
   "author": "",
   "license": "ISC"
