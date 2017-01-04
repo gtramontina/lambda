@@ -132,21 +132,25 @@ TEST('IS_GREATER_THAN')
 TEST('IS_NULL')
   (ASSERT(IS_NULL(NIL)))
 
+// Combinators -----------------------------------------------------------------
+
+Y = f => (x => f(y => (x(x))(y)))(x => f(y => (x(x))(y)))
+
 // Examples --------------------------------------------------------------------
 
 console.log('\n--- Examples ---\n')
 
-FACTORIAL = n => IF(IS_ZERO(n))
+FACTORIAL = Y(f => n => IF(IS_ZERO(n))
   (_ => SUCCESSOR(n))
-  (_ => MULTIPLICATION(n)(FACTORIAL(PREDECESSOR(n))))
-()
+  (_ => MULTIPLICATION(n)(f(PREDECESSOR(n))))
+())
 
-FIBONACCI = n => IF(IS_LESS_THAN_EQUAL(n)(SUCCESSOR(f => IDENTITY)))
+FIBONACCI = Y(f => n => IF(IS_LESS_THAN_EQUAL(n)(SUCCESSOR(f => IDENTITY)))
   (_ => n)
   (_ => ADDITION
-    (FIBONACCI(PREDECESSOR(n)))
-    (FIBONACCI(PREDECESSOR(PREDECESSOR(n)))))
-()
+    (f(PREDECESSOR(n)))
+    (f(PREDECESSOR(PREDECESSOR(n)))))
+())
 
 TEST('FACTORIAL: 5! = 120')(ASSERT(IS_EQUAL
   (FACTORIAL($five))
