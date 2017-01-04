@@ -5,7 +5,7 @@ SUCCESSOR      = n => f => x => f(n(f)(x))
 PREDECESSOR    = n => f => x => n(g => h => h(g(f)))(_ => x)(u => u)
 ADDITION       = m => n => n(SUCCESSOR)(m)
 SUBTRACTION    = m => n => n(PREDECESSOR)(m)
-MULTIPLICATION = m => n => m(ADDITION(n))(f => IDENTITY)
+MULTIPLICATION = m => n => f => m(n(f))
 POWER          = x => y => y(x)
 ABS_DIFFERENCE = x => y => ADDITION(SUBTRACTION(x)(y))(SUBTRACTION(y)(x))
 
