@@ -31,6 +31,26 @@ IS_GREATER_THAN       = m => n => NOT(IS_LESS_THAN_EQUAL(m)(n))
 IS_NULL               = p => p(x => y => FALSE)
 NIL                   = x => TRUE
 
+// Combinators -----------------------------------------------------------------
+
+Y = f => (x => f(y => (x(x))(y)))(x => f(y => (x(x))(y)))
+
+// Lists -----------------------------------------------------------------------
+
+CONS = x => y => f => f(x)(y)
+CAR  = p => p(TRUE)
+CDR  = p => p(FALSE)
+
+RANGE = m => n => Y(f => m => IF(IS_EQUAL(m)(n))
+  (_ => CONS(m)(NIL))
+  (_ => CONS(m)(f(SUCCESSOR(m))))
+())(m)
+
+MAP = x => g => Y(f => x => IF(IS_NULL(x))
+  (_ => x)
+  (_ => CONS(g(CAR(x)))(f(CDR(x))))
+())(x)
+
 // Test "Framework" ------------------------------------------------------------
 
 ASSERT = truth => IF(truth)
@@ -132,9 +152,39 @@ TEST('IS_GREATER_THAN')
 TEST('IS_NULL')
   (ASSERT(IS_NULL(NIL)))
 
-// Combinators -----------------------------------------------------------------
+TEST('CAR')(ASSERT(AND
+  (IS_EQUAL(CAR(CONS($five)($one)))($five))
+  (IS_EQUAL(CAR(CONS($two)(CONS($one)($three))))($two))))
 
-Y = f => (x => f(y => (x(x))(y)))(x => f(y => (x(x))(y)))
+TEST('CDR')(ASSERT(AND
+  (IS_EQUAL(CDR(CONS($five)($one)))($one))
+  (IS_EQUAL(CAR(CDR(CONS($two)(CONS($one)($three)))))($one))))
+
+TEST('CONS')(ASSERT(AND
+  (IS_EQUAL(CDR(CDR(CONS($two)(CONS($one)($three)))))($three))
+  (IS_EQUAL(CAR(CDR(CONS($five)(CONS($two)(CONS($one)($three))))))($two))))
+
+TEST('RANGE')(ASSERT(AND(
+    AND
+      (IS_EQUAL(CAR(RANGE($three)($five)))($three))
+      (IS_EQUAL(CAR(CDR(RANGE($three)($five))))($four)))(
+    AND
+      (IS_EQUAL(CAR(CDR(CDR(RANGE($three)($five)))))($five))
+      (IS_NULL(CDR(CDR(CDR(RANGE($three)($five)))))))))
+
+TEST('MAP')(ASSERT(AND(
+    AND
+      (IS_EQUAL
+        (CAR(MAP(RANGE($three)($five))(v => POWER(v)($two))))
+        (POWER($three)($two)))
+      (IS_EQUAL
+        (CAR(CDR(MAP(RANGE($three)($five))(v => POWER(v)($two)))))
+        (POWER($four)($two))))(
+    AND
+      (IS_EQUAL
+        (CAR(CDR(CDR(MAP(RANGE($three)($five))(v => POWER(v)($two))))))
+        (POWER($five)($two)))
+      (IS_NULL(CDR(CDR(CDR(MAP(RANGE($three)($five))(v => POWER(v)($two))))))))))
 
 // Examples --------------------------------------------------------------------
 
