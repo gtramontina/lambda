@@ -32,6 +32,7 @@ $ npm test
 * [Church Encoding - Wikipedia](https://en.wikipedia.org/wiki/Church_encoding)
 * [Programming with Nothing](https://codon.com/programming-with-nothing), by [@tomstuart](https://github.com/tomstuart)
 * [Fun with the Lambda Calculus](https://www.youtube.com/watch?v=QPqoFCHpLF4), by [@coreyhaines](https://github.com/coreyhaines)
+* [Types and Programming Languages (chapter 5, "The Untyped Lambda-Calculus") ](https://www.cis.upenn.edu/~bcpierce/tapl/), by [Benjamin C. Pierce](https://en.wikipedia.org/wiki/Benjamin_C._Pierce)
 
 ---
 
