@@ -4,7 +4,7 @@
   "description": "",
   "dependencies": {},
   "devDependencies": {
-    "chokidar-cli": "1.2.2"
+    "chokidar-cli": "2.0.0"
   },
   "scripts": {
     "test": "node --stack-size=65500 lambda",
